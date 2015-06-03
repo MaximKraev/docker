@@ -239,4 +239,5 @@ type ContainerConfig struct {
 	MemorySwap int64
 	CpuShares  int64
 	Cpuset     string
+	KernelMemory int64
 }

@@ -109,6 +109,7 @@ type NetworkInterface struct {
 type Resources struct {
 	Memory         int64            `json:"memory"`
 	MemorySwap     int64            `json:"memory_swap"`
+	KernelMemory   int64			`json:"kernel_memory"`
 	CpuShares      int64            `json:"cpu_shares"`
 	CpusetCpus     string           `json:"cpuset_cpus"`
 	CpusetMems     string           `json:"cpuset_mems"`

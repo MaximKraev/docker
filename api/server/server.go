@@ -1226,6 +1226,7 @@ func (s *Server) postBuild(version version.Version, w http.ResponseWriter, r *ht
 	buildConfig.ConfigFile = configFile
 	buildConfig.MemorySwap = int64ValueOrZero(r, "memswap")
 	buildConfig.Memory = int64ValueOrZero(r, "memory")
+	buildConfig.KernelMemory = int64ValueOrZero(r, "kernelmemory")
 	buildConfig.CpuShares = int64ValueOrZero(r, "cpushares")
 	buildConfig.CpuPeriod = int64ValueOrZero(r, "cpuperiod")
 	buildConfig.CpuQuota = int64ValueOrZero(r, "cpuquota")

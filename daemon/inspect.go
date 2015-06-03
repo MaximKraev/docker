@@ -43,6 +43,7 @@ func (daemon *Daemon) ContainerInspectRaw(name string) (*types.ContainerJSONRaw,
 		container.hostConfig.MemorySwap,
 		container.hostConfig.CpuShares,
 		container.hostConfig.CpusetCpus,
+		container.hostConfig.KernelMemory,
 	}
 
 	return &types.ContainerJSONRaw{base, config}, nil

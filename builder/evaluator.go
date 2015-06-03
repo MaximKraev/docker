@@ -129,6 +129,7 @@ type Builder struct {
 	cgroupParent string
 	memory       int64
 	memorySwap   int64
+	kernelMemory int64
 
 	cancelled <-chan struct{} // When closed, job was cancelled.
 }

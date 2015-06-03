@@ -47,6 +47,7 @@ type Config struct {
 	Pull           bool
 	Memory         int64
 	MemorySwap     int64
+	KernelMemory   int64
 	CpuShares      int64
 	CpuPeriod      int64
 	CpuQuota       int64
@@ -171,6 +172,7 @@ func Build(d *daemon.Daemon, buildConfig *Config) error {
 		cgroupParent:    buildConfig.CgroupParent,
 		memory:          buildConfig.Memory,
 		memorySwap:      buildConfig.MemorySwap,
+		kernelMemory:    buildConfig.KernelMemory,
 		cancelled:       buildConfig.WaitCancelled(),
 	}
 

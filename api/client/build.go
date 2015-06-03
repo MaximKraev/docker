@@ -53,6 +53,7 @@ func (cli *DockerCli) CmdBuild(args ...string) error {
 	dockerfileName := cmd.String([]string{"f", "-file"}, "", "Name of the Dockerfile (Default is 'PATH/Dockerfile')")
 	flMemoryString := cmd.String([]string{"m", "-memory"}, "", "Memory limit")
 	flMemorySwap := cmd.String([]string{"-memory-swap"}, "", "Total memory (memory + swap), '-1' to disable swap")
+	flKernelMemory := cmd.String([]string{"-kernel-memory"}, "", "Total kernel memory , '-1' to disable kernel_mempry support")
 	flCPUShares := cmd.Int64([]string{"c", "-cpu-shares"}, 0, "CPU shares (relative weight)")
 	flCpuPeriod := cmd.Int64([]string{"-cpu-period"}, 0, "Limit the CPU CFS (Completely Fair Scheduler) period")
 	flCpuQuota := cmd.Int64([]string{"-cpu-quota"}, 0, "Limit the CPU CFS (Completely Fair Scheduler) quota")
@@ -230,6 +231,19 @@ func (cli *DockerCli) CmdBuild(args ...string) error {
 			memorySwap = parsedMemorySwap
 		}
 	}
+
+	var kernelMemory int64
+	if *flKernelMemory != "" {
+		if *flKernelMemory == "-1" {
+			kernelMemory = -1
+		} else {
+			parsedKernelmemory, err := units.RAMInBytes(*flKernelMemory)
+			if err != nil {
+				return err
+			}
+			kernelMemory = parsedKernelmemory
+		}
+	}
 	// Send the build context
 	v := &url.Values{}
 
@@ -277,6 +291,7 @@ func (cli *DockerCli) CmdBuild(args ...string) error {
 	v.Set("cpuquota", strconv.FormatInt(*flCpuQuota, 10))
 	v.Set("cpuperiod", strconv.FormatInt(*flCpuPeriod, 10))
 	v.Set("memory", strconv.FormatInt(memory, 10))
+	v.Set("kernelmemory", strconv.FormatInt(kernelMemory, 10))
 	v.Set("memswap", strconv.FormatInt(memorySwap, 10))
 	v.Set("cgroupparent", *flCgroupParent)
 

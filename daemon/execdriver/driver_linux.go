@@ -51,6 +51,7 @@ func SetupCgroups(container *configs.Config, c *Command) error {
 		container.Cgroups.Memory = c.Resources.Memory
 		container.Cgroups.MemoryReservation = c.Resources.Memory
 		container.Cgroups.MemorySwap = c.Resources.MemorySwap
+		container.Cgroups.KernelMemory = c.Resources.KernelMemory
 		container.Cgroups.CpusetCpus = c.Resources.CpusetCpus
 		container.Cgroups.CpusetMems = c.Resources.CpusetMems
 		container.Cgroups.CpuPeriod = c.Resources.CpuPeriod
